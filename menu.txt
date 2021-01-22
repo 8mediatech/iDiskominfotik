@@ -1,0 +1,177 @@
+import 'package:diskominfotik_bengkalis/utils/resource/size.dart';
+import 'package:diskominfotik_bengkalis/utils/widget/BottomNavigationBar.dart';
+import 'package:diskominfotik_bengkalis/utils/widget/T2BubbleBotoomBar.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:diskominfotik_bengkalis/utils/resource/colors.dart';
+import 'package:diskominfotik_bengkalis/utils/resource/images.dart';
+import 'package:diskominfotik_bengkalis/utils/resource/string.dart';
+import 'package:diskominfotik_bengkalis/utils/widget/widget.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:nb_utils/nb_utils.dart';
+import '../main.dart';
+import 'Dashboard.dart';
+import 'Struktur.dart';
+import 'Profil.dart';
+import 'Sekretariat.dart';
+import 'Setting.dart';
+
+class HomePage extends StatefulWidget {
+  static String tag = '/HomePage';
+
+  @override
+  HomePageState createState() => HomePageState();
+}
+
+class HomePageState extends State<HomePage> {
+
+  var currentIndex = 0;
+  var isSelected = 0;
+
+
+  @override
+  void initState() {
+    super.initState();
+    currentIndex = 0;
+  }
+  // void changePage(int index) {
+  //   setState(() {
+  //     currentIndex = index;
+  //   });
+  // }
+  @override
+  Widget build(BuildContext context) {
+    //debugPrint('token: $token');
+    changeStatusColor(db6_colorPrimary);
+
+    final tabw = [
+      Dashboard(),
+      Profil(),
+      Sekretariat(),
+      Struktur(),
+      Setting(),
+    ];
+
+    Widget tabItem(var pos, var icon, var name) {
+      return GestureDetector(
+        onTap: () {
+          setState(() {
+            isSelected = pos;
+          });
+        },
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Container(
+            alignment: Alignment.center,
+            decoration: isSelected == pos ? BoxDecoration(shape: BoxShape.rectangle, color: db6_colorPrimary, borderRadius: BorderRadius.circular(8)) : BoxDecoration(),
+            child: Padding(
+              padding: EdgeInsets.all(6.0),
+              child: Column(
+                children: <Widget>[
+                  SvgPicture.asset(
+                    icon,
+                    width: 20,
+                    height: 20,
+                    color: isSelected == pos ? db6_white : db6_textColorSecondary,
+                  ),
+                  text(name, textColor: isSelected == pos ? db6_white : db6_textColorSecondary, fontSize: textSizeSmall)
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
+    return Scaffold(
+      bottomNavigationBar: Stack(
+        alignment: Alignment.topCenter,
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.all(16),
+            height: 70,
+            decoration: BoxDecoration(
+              color: appStore.scaffoldBackground,
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              boxShadow: [
+                BoxShadow(
+                  color: shadowColorGlobal,
+                  blurRadius: 10,
+                  spreadRadius: 2,
+                ),
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Flexible(
+                  child: tabItem(0, db6_ic_home, lbl_home),
+                  flex: 1,
+                ),
+                Flexible(
+                  child: tabItem(1, db4_info, lbl_profil),
+                  flex: 1,
+                ),
+                Flexible(
+                  child: tabItem(2, db4_organize, lbl_sekre),
+                  flex: 1,
+                ),
+                Flexible(
+                  child: tabItem(3, db4_download, lbl_pegawai),
+                  flex: 1,
+                ),
+                Flexible(
+                  child: tabItem(4, db4_setting, lbl_setting),
+                  child: tabItem(4, db4_setting, lbl_setting),
+                  flex: 1,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      // bottomNavigationBar: BubbleBottomBar(
+      //   backgroundColor: appStore.appBarColor,
+      //   opacity: .2,
+      //   currentIndex: currentIndex,
+      //   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      //   elevation: 8,
+      //   onTap: changePage,
+      //   hasNotch: true,
+      //   hasInk: true,
+      //   inkColor: db6_colorPrimary,
+      //   items: <BubbleBottomBarItem>[
+      //     tab(Icons.home, lbl_home),
+      //     tab(Icons.corporate_fare,lbl_profil),
+      //     tab(Icons.addchart,lbl_sekre),
+      //     tab(Icons.person_outline,lbl_pegawai),
+      //     tab(Icons.settings,lbl_setting),
+      //   ],
+      // ),
+      // bottomNavigationBar: Container(
+      //   decoration: BoxDecoration(boxShadow: [BoxShadow(color: dbShadowColor, offset: Offset.fromDirection(3, 1), spreadRadius: 1, blurRadius: 5)]),
+      //   child: Db6BottomNavigationBar(
+      //     items: <Db6BottomNavigationBarItem>[
+      //       Db6BottomNavigationBarItem(icon: db6_ic_home, title: Text(lbl_home, style: TextStyle(color: db6_textColorSecondary))),
+      //       Db6BottomNavigationBarItem(icon: db4_info, title: Text(lbl_profil, style: TextStyle(color: db6_textColorSecondary))),
+      //       Db6BottomNavigationBarItem(icon: db4_organize, title: Text(lbl_sekre, style: TextStyle(color: db6_textColorSecondary))),
+      //       Db6BottomNavigationBarItem(icon: db4_download, title: Text(lbl_pegawai, style: TextStyle(color: db6_textColorSecondary))),
+      //       Db6BottomNavigationBarItem(icon: db4_setting, title: Text(lbl_setting, style: TextStyle(color: db6_textColorSecondary))),
+      //     ],
+      //     currentIndex: _selectedIndex,
+      //     unselectedIconTheme: IconThemeData(color: db6_textColorSecondary, size: 24),
+      //     selectedIconTheme: IconThemeData(color: db6_colorPrimary, size: 24),
+      //     selectedLabelStyle: TextStyle(color: db6_colorPrimary),
+      //     onTap: (int index) {
+      //       setState(() {
+      //         _selectedIndex = index;
+      //       });
+      //     },
+      //     type: Db6BottomNavigationBarType.fixed,
+      //   ),
+      // ),
+      body: tabw[isSelected],
+
+    );
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "32247616286",
+    "project_id": "diskominfotikbengkalis-41b21",
+    "storage_bucket": "diskominfotikbengkalis-41b21.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:32247616286:android:19df43a61fee5a564c6f0f",
+        "android_client_info": {
+          "package_name": "com.diskominfotik.bengkalis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "32247616286-fn2hqn2qj3sr6q94302supg2t001i0p0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9ZW5_vKCQZqaPNzhfSLhOaBXfivtNwK4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "32247616286-fn2hqn2qj3sr6q94302supg2t001i0p0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
